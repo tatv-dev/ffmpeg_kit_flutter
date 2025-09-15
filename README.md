@@ -46,7 +46,9 @@ dependencies:
 		  ref: main # branch name
 	
 ```
-Copy 3 file vào thư mục android/app/libs ở dự án gốc rồi implementation:
+
+Copy 3 file ở `libs/` vào thư mục `android/app/libs` ở dự án gốc rồi `implementation`:
+
 ```
 implementation(files("libs/ffmpeg-kit-full-gpl-6.0-2.LTS.aar"))
 implementation(files("libs/smart-exception-common-0.2.1.jar"))
