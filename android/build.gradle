@@ -1,0 +1,71 @@
+group = "com.arthenica.ffmpegkit.flutter"
+version = "1.0-SNAPSHOT"
+
+buildscript {
+    ext.kotlin_version = "2.1.10"
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url uri("${rootDir}/android/local_maven")
+        }
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.7.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url uri("${rootDir}/android/local_maven")
+        }
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    namespace = "com.arthenica.ffmpegkit.flutter"
+
+    compileSdk = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        minSdk = 24
+        versionCode 603
+        versionName "1.0.0"
+    }
+
+    dependencies {
+        implementation("androidx.annotation:annotation:1.9.1")
+//        implementation("com.arthenica:ffmpeg-kit-https:6.0-2.LTS")
+//        implementation(files("libs/ffmpeg-kit-full-gpl-6.0-2.LTS.aar"))
+        compileOnly files("$rootDir/app/libs/ffmpeg-kit-full-gpl-6.0-2.LTS.aar")
+        compileOnly files("$rootDir/app/libs/smart-exception-common-0.2.1.jar")
+        compileOnly files("$rootDir/app/libs/smart-exception-java-0.2.1.jar")
+    }
+}
